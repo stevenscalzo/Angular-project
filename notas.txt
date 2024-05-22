@@ -1,0 +1,22 @@
+sudo docker run -it -p 4200:4200 -v $(pwd)/:/app angular_project /bin/bash
+
+sudo docker exec -it 58144542152c ng serve --host 0.0.0.0
+
+sudo docker run -p 4200:4200 -v $(pwd)/:/app -d angular_project
+
+sudo docker stop angular_project
+
+sudo docker exec -it angular_project /bin/bash
+
+sudo chown -R steven2:steven2 .
+
+sudo docker start angular_project
+
+docker run -it -p 4200:4200 angular_project sh
+
+
+docker build -t angular_project .
+docker run -it -v $(pwd):/app angular_project sh
+docker rename thirsty_euclid angular_project
+ng serve --host 0.0.0.0
+http://172.17.0.2:4200/products

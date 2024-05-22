@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">Pedidos realizados</div>
+                <div class="card-body">
+
+                    @for (order of orders; track order._id) {
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{ order._id }}
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        <p class="panel-description">Fecha: {{ order.paidAt | date: 'yyyy-MM-dd HH:mm' }}</p>
+                                        <p class="panel-description">Total del pedido: {{ order.total + (order.total * 0.21) }}€</p>    
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <table class="table">
+                                    <tbody>
+                                        @for (product of order.products; track product._id) {
+                                            <tr>
+                                                <td class="imagen"><img [src]="product.productId.imageUrl"></td>
+                    
+                                                <td class="title">{{ product.productId.title }}</td>
+                                                <td class="qty">Cantidad: {{ product.qty }}</td>
+                                                <td class="qty">Precio: {{ product.price }}€ c/u</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

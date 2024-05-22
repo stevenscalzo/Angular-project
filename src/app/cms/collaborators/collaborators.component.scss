@@ -1,0 +1,15 @@
+@import "./../../shared/variables.scss";
+
+.info {
+    margin: 40px 0;
+}
+
+h1,h2 {
+    color: $text-color-primary;
+}
+
+.card-title {
+    border-bottom: solid 1px gray;
+    margin-bottom: 30px;
+    padding-bottom: 15px; 
+}

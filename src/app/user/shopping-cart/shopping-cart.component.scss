@@ -1,0 +1,59 @@
+@import "./../../shared/mixins.scss";
+
+.table {
+    .imagen {
+        width: 120px;
+
+        img {
+            height: 80px;
+            width: 90px;
+        }
+    }
+    
+    .title {
+        width: 400px;
+        color: gray
+    }
+
+    p {
+        color: gray;
+        font-size: 12px;
+    }
+
+    .qty {
+        width: 170px;
+        
+        input {
+            max-width: 60px;
+        }
+    }
+}
+
+.end {
+    text-align: end;
+}
+
+.buttons {
+    margin-top: 20px;
+
+    button {
+        margin-bottom: 6px;
+        width: 100%;
+    }
+}
+
+.cart {
+    margin-top: 70px;
+}
+
+.primary-btn {
+    @include primary-btn;
+}
+
+.secondary-btn {
+    @include secondary-btn;
+}
+
+table {
+    margin-top: 30px;
+}

@@ -1,0 +1,150 @@
+@if(user) {
+    <div class="container profile">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <h2 class="text-left">Mi cuenta</h2>
+            </div>
+            <div class="col-2 d-flex justify-content-between title-block">
+                @if(!profileForm.invalid && !addressForm.invalid && isDataChanged) {
+                    <button class="btn btn-outline-secondary" (click)="cancel()"
+                        [disabled]="profileForm.invalid || addressForm.invalid || !isDataChanged">Cancelar</button>
+                    <button class="btn secondary-btn" (click)="updateProfile()"
+                        [disabled]="profileForm.invalid || addressForm.invalid || !isDataChanged"><fa-icon
+                            [icon]="icons.faFloppyDisk"></fa-icon> Guardar</button>
+                }
+            </div>
+        </div>
+
+        @if(profileForm.invalid || addressForm.invalid) {
+        <div class="alert alert-danger" role="alert">
+            Todos los campos son requeridos
+        </div>
+        }
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">Información básica</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="profile-picture" (click)="openFileInput()">
+                                    <a href="javascript:void(0)">
+                                        <img [src]="user.avatar" alt="Foto de perfil" class="img-fluid rounded-circle">
+                                        <div class="overlay">
+                                            <fa-icon [icon]="icons.faImage"></fa-icon>
+                                        </div>
+                                        <input type="file" accept="image/*" class="d-none" #fileInput
+                                            (change)="updateAvatar($event)" />
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <h5>{{ user.name }}</h5>
+                                </div>
+                                <div class="mb-3">
+                                    <h6>ID: {{ user._id }}</h6>
+                                </div>
+                                <button class="btn btn-outline-secondary" (click)="openPasswordForm()"><fa-icon
+                                        [icon]="icons.faLock"></fa-icon> Cambiar contraseña</button>
+                            </div>
+                        </div>
+                        <form [formGroup]="profileForm">
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Nombre del usuario"
+                                    formControlName="name"
+                                    [ngClass]="validClasses(profileForm.controls.email,'is-valid', 'is-invalid')">
+                                @if(profileForm.controls.name.errors?.['required']) {
+                                <div class="invalid-feedback">El nombre es obligatorio</div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="correo">Correo electrónico:</label>
+                                <input type="email" class="form-control" id="correo" placeholder="Correo electrónico"
+                                    formControlName="email"
+                                    [ngClass]="validClasses(profileForm.controls.email,'is-valid', 'is-invalid')">
+                                @if(profileForm.controls.email.errors?.['required']) {
+                                <div class="invalid-feedback">El correo es obligatorio</div>
+                                }
+                                @if(profileForm.controls.email.errors?.['email']) {
+                                <div class="invalid-feedback">El formato de email no es valido</div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" class="form-control" id="telefono" placeholder="Teléfono"
+                                    formControlName="phone"
+                                    [ngClass]="validClasses(profileForm.controls.phone,'is-valid', 'is-invalid')">
+                                @if(profileForm.controls.phone.errors?.['required']) {
+                                <div class="invalid-feedback">El telefono es obligatorio</div>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Dirección</div>
+                    <div class="card-body">
+                        <form [formGroup]="addressForm">
+                            <div class="form-group">
+                                <label for="pais">País:</label>
+                                <input type="text" class="form-control" id="pais" placeholder="País"
+                                    formControlName="country"
+                                    [ngClass]="validClasses(addressForm.controls.country,'is-valid', 'is-invalid')">
+                                @if(addressForm.controls.country.errors?.['required']) {
+                                <div class="invalid-feedback">El país es obligatorio</div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="provincia">Provincia:</label>
+                                <input type="text" class="form-control" id="provincia" placeholder="Provincia"
+                                    formControlName="state"
+                                    [ngClass]="validClasses(addressForm.controls.state,'is-valid', 'is-invalid')">
+                                @if(addressForm.controls.state.errors?.['required']) {
+                                <div class="invalid-feedback">La provincia es obligatoria</div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="ciudad">Ciudad:</label>
+                                <input type="text" class="form-control" id="ciudad" placeholder="Ciudad"
+                                    formControlName="city"
+                                    [ngClass]="validClasses(addressForm.controls.city,'is-valid', 'is-invalid')">
+                                @if(addressForm.controls.city.errors?.['required']) {
+                                <div class="invalid-feedback">La ciudad es obligatoria</div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label>
+                                <input type="text" class="form-control" id="direccion" placeholder="Dirección"
+                                    formControlName="address"
+                                    [ngClass]="validClasses(addressForm.controls.address,'is-valid', 'is-invalid')">
+                                @if(addressForm.controls.address.errors?.['required']) {
+                                <div class="invalid-feedback">La dirección es obligatoria</div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="codigo-postal">Código Postal:</label>
+                                <input type="text" class="form-control" id="codigo-postal" placeholder="Código Postal"
+                                    formControlName="postalCode"
+                                    [ngClass]="validClasses(addressForm.controls.postalCode,'is-valid', 'is-invalid')">
+                                @if(addressForm.controls.postalCode.errors?.['required']) {
+                                <div class="invalid-feedback">El código postal es obligatorio</div>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if(orders.length > 0) {
+        <shopping-history [orders]="orders"/>
+    }
+}

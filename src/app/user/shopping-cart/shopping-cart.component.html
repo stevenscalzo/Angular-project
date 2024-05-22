@@ -1,0 +1,112 @@
+@if(cart && cart.products.length > 0) {
+<div class="container cart px-4">
+    <div class="row gx-3">
+        <div class="col-9">
+            <div class="p-3 border bg-light">
+                <div class="row justify-content-between">
+                    <h3 class="col-9">Tu carrito de compras</h3>
+                    <div class="col-3 end">
+                        <button type="button" class="btn primary-btn" (click)="updateOrder()">Actualizar
+                            carrito</button>
+                    </div>
+                </div>
+                <table class="table">
+                    <tbody>
+                        @for (product of cart.products; track product._id) {
+                        <tr>
+                            <td class="imagen"><img [src]="product.productId.imageUrl"></td>
+
+                            <td class="title">{{ product.productId.title }}</td>
+                            <td class="qty">
+                                <div class="input-group input-spinner">
+                                    <button class="btn btn-icon btn-light" type="button"
+                                        (click)="decreaseQuantity(product._id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#000000"
+                                            viewBox="0 0 24 24">
+                                            <path d="M19 13H5v-2h14v2z"></path>
+                                        </svg>
+                                    </button>
+                                    <input class="form-control text-center" placeholder="" value="1"
+                                        [value]="product.qty">
+                                    <button class="btn btn-icon btn-light" type="button"
+                                        (click)="increaseQuantity(product._id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#000000"
+                                            viewBox="0 0 24 24">
+                                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+
+                            <td>{{ product.price * product.qty }}€ <p>{{ product.price }}€ la unidad</p>
+                            </td>
+                            <td><button type="button" class="btn primary-btn"
+                                    (click)="removePoduct(product._id)"><fa-icon
+                                        [icon]="icons.faTrash"></fa-icon></button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="p-3 border bg-light">
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        Precio total:
+                    </div>
+                    <div class="col-4 end">
+                        {{ cart.total }}€
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        Descuentos:
+                    </div>
+                    <div class="col-4 end">
+                        -0€
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        Tax (21%):
+                    </div>
+                    <div class="col-4 end">
+                        {{ getTaxedTotal(cart.total, 0) }}€
+                    </div>
+                </div>
+                <hr />
+
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        Total:
+                    </div>
+                    <div class="col-4 end">
+                        {{ getTaxedTotal(cart.total, cart.total) }}€
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="btn secondary-btn" (click)="makeOrder()">Tramitar pedido</button>
+                    <button type="button" class="btn btn-outline-secondary" (click)="goBack()">Volver a la
+                        tienda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+} @else {
+<div class="container cart px-4">
+    <div class="row gx-3">
+        <div class="p-3 border bg-light">
+            <div class="row justify-content-between">
+                <h3 class="col-9">No tienes productos en el carrito...</h3>
+                <div class="col-3 end">
+                    <button type="button" class="btn btn-outline-secondary" (click)="goBack()">Volver a la
+                        tienda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}

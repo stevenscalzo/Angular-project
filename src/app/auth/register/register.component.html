@@ -1,0 +1,60 @@
+<form [formGroup]="registerForm" (ngSubmit)="addUser()">
+    <p>(*) Campos obligatorios</p>
+    <div class="mb-3">
+        <label for="name">* Name:</label>
+        <input type="text" class="form-control" id="name" name="nameUser" placeholder="Name" formControlName="name"
+            [ngClass]="validClasses(registerForm.controls.name,'is-valid', 'is-invalid')" />
+        @if(registerForm.controls.name.errors?.['required']) {
+        <div class="invalid-feedback">El nombre es obligatorio</div>
+        }
+    </div>
+    <div formGroupName="emailGroup">
+        <div class="mb-3">
+            <label for="email">* Email:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" formControlName="email"
+                [ngClass]="validClasses(registerForm.controls.emailGroup,'is-valid', 'is-invalid')" />
+        </div>
+        <div class="mb-3">
+            <label for="email2">* Repetir email:</label>
+            <input type="email" class="form-control" id="email2" name="email2" placeholder="Email"
+                formControlName="emailConfirm"
+                [ngClass]="validClasses(registerForm.controls.emailGroup,'is-valid', 'is-invalid')" />
+            @if(registerForm.controls.emailGroup.invalid && registerForm.controls.emailGroup.touched) {
+            <div class="invalid-feedback">El email es obligatorio, debe coincidir y debe tener el formato adecuado</div>
+            }
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password">* Contraseña:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+            formControlName="password" 
+            [ngClass]="validClasses(registerForm.controls.password,'is-valid', 'is-invalid')"/>
+        @if(registerForm.controls.password.errors?.['minlength']) {
+        <div class="invalid-feedback">La contraseña debe tener al menos 4 caracteres</div>
+        }
+        @if(registerForm.controls.password.errors?.['required']) {
+        <div class="invalid-feedback">La contraseña es obligatoria</div>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="avatar">* Imagen de perfil</label>
+        <input type="file" class="form-control" id="avatar" name="avatar" formControlName="avatar"
+            (change)="changeImage($event)" (click)="resetImage($event)" 
+            [ngClass]="validClasses(registerForm.controls.avatar,'is-valid', 'is-invalid')"/>
+            @if(registerForm.controls.avatar.errors?.['required']) {
+                <div class="invalid-feedback">La imagen de perfil es obligatoria</div>
+                }
+    </div>
+    <img src="" alt="" id="imgPreview" class="img-thumbnail" [src]="imageBase64"
+        [ngClass]="{'d-none': !imageBase64}" />
+    <p class="text-danger" id="errorInfo"></p>
+
+    <div class="row">
+        <div class="col-auto">
+            <button type="submit" class="btn secondary-btn" [disabled]="!registerForm.valid">Registrarse</button>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close(false)">Cancelar</button>
+        </div>
+    </div>
+</form>

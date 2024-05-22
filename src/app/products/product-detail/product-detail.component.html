@@ -1,0 +1,69 @@
+@if(product) {
+  <div class="container">
+    <div class="row product-detail">
+      <aside class="col-lg-6">
+        <article class="gallery-wrap">
+          <div class="img-big-wrap img-thumbnail">
+            <a data-fslightbox="mygalley" data-type="image" [href]="product.imageUrl">
+              <img height="560" [src]="product.imageUrl">
+            </a>
+          </div>
+        </article>
+      </aside>
+      <main class="col-lg-6">
+        <article class="ps-lg-3">
+          <h4 class="title text-dark">{{product.title}}</h4>
+          <div class="rating-wrap my-3">
+            <span class="label-rating text-success">Disponible</span>
+          </div>
+    
+          <div class="mb-3">
+            <var class="price h5">{{product.price}}€</var>
+          </div>
+    
+          <p>{{product.description}}</p>
+          <a [href]="product.webUrl" target="_blank">
+            <label class="form-label">Ver producto en {{product.web.name}}</label>
+          </a>
+    
+          <dl class="row">
+            <div class="star-container">
+              @for (star of [1,2,3,4,5]; track star) {
+              <i
+                class="fa-star"
+                [ngClass]="{ 'fa-solid': star <= product.rating, 'fa-regular': star > product.rating }"
+              ></i>
+              }
+            </div>
+          </dl>
+          <hr>
+          <div class="row mb-4">
+            <div class="col-md-4 col-6 mb-3">
+              <label class="form-label d-block">Cantidad</label>
+              <div class="input-group input-spinner">
+                <button class="btn btn-icon btn-light" type="button" (click)="decreaseQuantity()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#000000" viewBox="0 0 24 24">
+                    <path d="M19 13H5v-2h14v2z"></path>
+                  </svg>
+                </button>
+                <input class="form-control text-center" placeholder="" value="1" [value]="quantity">
+                <button class="btn btn-icon btn-light" type="button" (click)="increaseQuantity()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#000000" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+          </div> 
+    
+          <button class="btn secondary-btn" (click)="addToCart()"> <i class="me-1 fa fa-shopping-basket"></i> Añadir al carrito</button>
+    
+        </article>
+      </main> 
+    </div> 
+  </div>
+
+} @else {
+<p>Cargando producto...</p>
+}

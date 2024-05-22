@@ -1,0 +1,23 @@
+@import "./variables.scss";
+
+@mixin primary-btn {
+    border: solid 1px $secundary-color;
+    color: $secundary-color;
+
+    &:hover {
+        background-color: $secundary-color;
+        color: white;
+    }
+}
+
+@mixin secondary-btn {
+    color: white;
+    background-color: $secundary-color;
+
+
+    &:hover {
+        border: solid 1px $secundary-color;
+        background-color: white;
+        color: $secundary-color;
+    }
+}

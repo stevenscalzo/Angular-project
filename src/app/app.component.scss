@@ -1,0 +1,18 @@
+@import "./shared/variables.scss";
+
+menu {
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+main {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+footer {
+    background-color: $primary-color;
+}

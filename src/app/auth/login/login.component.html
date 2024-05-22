@@ -1,0 +1,35 @@
+<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+    <div class="mb-3">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Email" formControlName="email"
+            [ngClass]="validClasses(loginForm.controls.email,'is-valid', 'is-invalid')" />
+        @if(loginForm.controls.email.errors?.['required']) {
+        <div class="invalid-feedback">El correo es obligatorio</div>
+        }
+        @if(loginForm.controls.email.errors?.['email']) {
+        <div class="invalid-feedback">El formato de email no es valido</div>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+            formControlName="password" 
+            [ngClass]="validClasses(loginForm.controls.password,'is-valid', 'is-invalid')"/>
+        @if(loginForm.controls.password.errors?.['required']) {
+        <div class="invalid-feedback">La contraseña es obligatoria</div>
+        }
+    </div>
+
+    @if(errorMessage) {
+    <p class="text-danger" id="errorInfo">{{errorMessage}}</p>
+    }
+
+    <div class="row">
+        <div class="col-auto">
+            <button type="submit" class="btn secondary-btn" [disabled]="!loginForm.valid">Acceder</button>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close(false)">Cancelar</button>
+        </div>
+    </div>
+</form>

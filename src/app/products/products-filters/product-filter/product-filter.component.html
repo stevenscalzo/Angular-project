@@ -1,0 +1,22 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ filtersLabels[type] }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <section class="example-section">
+    <span class="example-list-section">
+      <ul>
+        @for (subfilter of filter.subfilter; track subfilter) {
+        <li>
+          <mat-checkbox [(ngModel)]="subfilter.completed" [color]="subfilter.color"
+            (change)="onCheckboxChange(subfilter.value)">
+            {{subfilter.name}}
+          </mat-checkbox>
+        </li>
+        }
+      </ul>
+    </span>
+  </section>
+</mat-expansion-panel>

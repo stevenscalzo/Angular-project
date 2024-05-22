@@ -1,0 +1,24 @@
+.table {
+    .imagen {
+        width: 120px;
+
+        img {
+            height: 80px;
+            width: 90px;
+        }
+    }
+
+    .title {
+        width: 400px;
+        color: gray
+    }
+
+    p {
+        color: gray;
+        font-size: 12px;
+    }
+}
+
+.panel-description {
+    margin: auto 180px auto 0;
+}

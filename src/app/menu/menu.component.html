@@ -1,0 +1,65 @@
+<div class="mat-container">
+    <mat-toolbar color="primary" class="mat-toolbar justify-content-between">
+        <div class="d-flex col-4">
+            <a class="navbar-brand" [routerLink]="['/']"><img class="logo" [src]="logo"  alt=""/></a>
+            <button mat-icon-button class="menu-btn" (click)="snav.toggle()">
+                <fa-icon
+                [icon]="icons.faBars"></fa-icon>
+            </button>
+        </div>
+
+        <div class="col-4 d-flex justify-content-center">
+            <div class="search">
+                <input type="text" #searchInput (keyup.enter)="search(searchInput.value)">
+                <button (click)="search(searchInput.value)">
+                    <fa-icon [icon]="icons.faMagnifyingGlass"></fa-icon>
+                </button>
+            </div>
+        </div>
+      
+
+        <ul class="navbar-nav col-4 justify-content-end">
+            @if(logged()) {
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/user/profile']" [routerLinkActive]="['active']"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="icons.faUser"></fa-icon>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/user/cart']" [routerLinkActive]="['active']"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="icons.faCartShopping"></fa-icon>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" (click)="logout()">
+                    <fa-icon [icon]="icons.faArrowRightFromBracket"></fa-icon></a>
+            </li>
+
+            }
+            @if(!logged()) {
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" (click)="openLoginForm()">
+                    <fa-icon [icon]="icons.faUserRegular"></fa-icon>
+                </a>
+            </li>
+            }
+        </ul>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="mat-sidenav-container" [style.marginTop.px]="0">
+        <mat-sidenav #snav [mode]="'side'" fixedTopGap="56">
+            <mat-nav-list>
+                @for (category of categories; track category._id) {
+                <a mat-list-item [routerLink]="['/products', category._id]">{{category.name}}</a>
+                }
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div class="contenedor">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

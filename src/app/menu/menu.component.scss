@@ -1,0 +1,98 @@
+@import "./../shared/variables.scss";
+
+.contenedor {
+  width: 90%;
+  margin: auto;
+  min-height: 750px;
+}
+
+.mat-mdc-button:not(:disabled) {
+  color: white
+}
+
+.navbar-nav {
+  //margin-left: auto;
+  display: flex;
+  flex-direction: row;
+
+  li {
+    margin: auto 10px;
+  }
+}
+
+.mat-container {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .mat-toolbar {
+    padding: 0 30px;
+  
+    &.mat-primary {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.mat-sidenav-container {
+  flex: 1;
+  background-color: transparent;
+}
+
+.menu-btn {
+  padding: 9px;
+}
+
+
+.container {
+  margin-top: 20px;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.search {
+  background: white;
+  border-radius: 20px;
+  max-width: 420px;
+
+  button {
+    background: transparent;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    width: 50px;
+    height: 40px;
+    color: #555;
+
+    &:hover {
+      background: #d7d6d6;
+    }
+  }
+
+  input {
+    width: 350px;
+    height: 40px;
+    margin-left: 20px;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.logo {
+  width: 110px;
+}
+
+fa-icon {
+  color: $secundary-color;
+}
+
+.mdc-list-item__primary-text {
+  color: $secundary-color;
+}

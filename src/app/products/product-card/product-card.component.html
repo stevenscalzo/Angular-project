@@ -1,0 +1,18 @@
+<div class="card justify-content-between">
+    <a href="#" [routerLink]="['/products/detail', product._id]">
+        <div class="card-img-top">
+            <img [src]="product.imageUrl" alt="Card image cap">
+        </div>
+
+        <div class="card-body">
+            <h4 class="card-price">{{product.price}} €</h4>
+            <div class="card-title">{{product.title}}</div>
+        </div>
+    </a>
+    <div class="card-footer">
+        <a [href]="product.webUrl" target="_blank">
+            <img [src]="product.web.imageUrl" class="img-fluid rounded-circle" alt="Card image cap">
+            <label class="form-label">Ver producto en {{product.web.name}}</label>
+        </a>
+    </div>
+</div>

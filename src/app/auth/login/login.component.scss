@@ -1,0 +1,13 @@
+@import "./../../shared/mixins.scss";
+
+form {
+    padding: 30px;
+
+    .primary-btn {
+        @include primary-btn;
+    }
+
+    .secondary-btn {
+        @include secondary-btn;
+    }
+}
