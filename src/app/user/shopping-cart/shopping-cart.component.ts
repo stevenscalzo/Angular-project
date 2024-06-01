@@ -76,7 +76,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getTaxedTotal(price: number, sum: number): number {
-    console.log(parseFloat(((price * 0.21) + sum).toFixed(2)))
     return parseFloat(((price * 0.21) + sum).toFixed(2));
   }
 
