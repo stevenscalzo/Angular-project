@@ -20,3 +20,8 @@ export interface Address {
     address: string;
     postalCode: string;
 }
+
+export interface Country {
+    _id: string;
+    name: string;
+}

@@ -1,7 +1,7 @@
 import { Category } from "./category";
 import { Order } from "./order";
 import { Product } from "./product";
-import { User } from "./user";
+import { Country, User } from "./user";
 import { Web } from "./web";
 
 export interface TokenResponse {
@@ -61,4 +61,8 @@ export interface ErrorResponse {
     statusCode: number | null;
     status: number | null;
     message: string[];
+}
+
+export interface CountriesResponse {
+    countries: Country[];
 }

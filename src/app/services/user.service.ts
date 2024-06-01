@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { User } from '../interfaces/user';
-import { AvatarResponse, UserResponse } from '../interfaces/responses';
+import { Country, User } from '../interfaces/user';
+import { AvatarResponse, CountriesResponse, UserResponse } from '../interfaces/responses';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,12 @@ export class UserService {
     return this.#http
     .get<UserResponse>(`${this.#userUrl}/me`)
     .pipe(map((resp) => resp.user));
+  }
+
+  getCountries(): Observable<Country[]> {
+    return this.#http
+    .get<CountriesResponse>('countries')
+    .pipe(map((resp) => resp.countries));
   }
 
   saveAvatar(avatar: string): Observable<string> {

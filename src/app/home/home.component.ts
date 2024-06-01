@@ -64,7 +64,7 @@ export class HomeComponent {
       text: '',
       cols: 2,
       rows: 1,
-      image: "url('https://www.esloganmagazine.com/wp-content/uploads/2021/06/marketing-y-publicidad-en-amazon.jpg')",
+      image: "url('https://esloganmagazine.com/wp-content/uploads/2021/06/marketing-y-publicidad-en-amazon.jpg')",
       size: "cover",
       position: "center"
     },

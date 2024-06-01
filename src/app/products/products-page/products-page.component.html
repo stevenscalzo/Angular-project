@@ -1,46 +1,42 @@
-@if (loaging) {
-    <div class="container d-flex justify-content-center">
-        <mat-spinner></mat-spinner>
-    </div>
-}@else {
-    @if(products.length > 0) {
-        <div class="row">
-            <div class="col-3 filters">
+@if(products.length > 0) {
+    <div class="row">
+        <div class="col-3 filters">
+            @if(prices.length > 0 && webs.length > 0) {
                 <products-filters [prices]="prices" [webs]="webs" (filtersApplied)="handleFiltersApplied($event)" />
-            </div>
-            <div class="col-9">
-                @if (category) {
-                    <div class="title">
-                        <h1>{{ category.name }}</h1>
-                    </div>
-                } @else {
-                    <div class="title">
-                        <h1>Resultados para: {{ searchText }}</h1>
-                    </div>
-                }
-    
-                @if(productsFiltered.length > 0) {
-                    <div class="card-group">
-                        @for (product of productsFiltered; track product._id) {
-                        <product-card [product]="product" />
-                        }
-                    </div>
-                } @else {
-                    <p>No se encontraron productos</p>
-                }
-            </div>
+            }
         </div>
-    } @else {
-        @if (category) {
+        <div class="col-9">
+            @if (category) {
             <div class="title">
-                <p>No se encontraron productos</p>
+                <h1>{{ category.name }}</h1>
             </div>
-        } @else {
-            <div class="title no-data">
+            } @else {
+            <div class="title">
                 <h1>Resultados para: {{ searchText }}</h1>
-                <br>
-                <p>No se encontraron productos</p>
             </div>
-        }
+            }
+
+            @if(productsFiltered.length > 0) {
+                <div class="card-group">
+                    @for (product of productsFiltered; track product._id) {
+                    <product-card [product]="product" />
+                    }
+                </div>
+            } @else {
+            <p>No se encontraron productos</p>
+            }
+        </div>
+    </div>
+} @else {
+    @if (category) {
+    <div class="title">
+        <p>No se encontraron productos</p>
+    </div>
+    } @else {
+        <div class="title no-data">
+            <h1>Resultados para: {{ searchText }}</h1>
+            <br>
+            <p>No se encontraron productos</p>
+        </div>
     }
 }

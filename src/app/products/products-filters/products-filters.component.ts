@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
@@ -23,10 +23,6 @@ export class ProductsFiltersComponent {
   webType = "web";
   selectedPriceValues: any[] = [];
   selectedWebValues: any[] = [];
-
-  ngAfterViewInit(): void {
-    this.accordion.openAll();
-  }
 
   applyFilters() {
     this.filtersApplied.emit({

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
 import { productResolver } from '../resolvers/product.resolver';
 import { categoryResolver } from '../resolvers/category.resolver';
+import { productsResolver } from '../resolvers/products.resolver';
 
 
 export const productsRoutes: Routes = [
     {
         path: ':id',
-       // title: 'Productos',
         resolve: {
             category: categoryResolver,
+            products: productsResolver,
         },
         loadComponent: () =>
             import('./products-page/products-page.component').then(
@@ -18,6 +19,9 @@ export const productsRoutes: Routes = [
     {
         path: 'search/:text',
         title: 'Productos',
+        resolve: {
+            products: productsResolver,
+        },
         loadComponent: () =>
             import('./products-page/products-page.component').then(
                 (m) => m.ProductsPageComponent

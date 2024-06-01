@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable, map, of, catchError } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { TokenResponse } from '../interfaces/responses';
 import { User, UserLogin } from '../interfaces/user';
 
@@ -32,26 +32,6 @@ export class AuthService {
     localStorage.removeItem("token");
     this.#logged.set(false);
   }
-/*
-  isLogged(): Observable<boolean> {
-    if (!this.conditionalLogged() && !localStorage.getItem('token')) {
-      return of(false);
-    } else if (this.conditionalLogged()) {
-      return of(true);
-    } else {
-      return this.#http.get<string>(`${this.#authUrl}/validate`).pipe(
-        map(() => {
-          this.#logged.set(true);
-          return true;
-        }),
-        catchError(() => {
-          localStorage.removeItem("token");
-          this.#logged.set(false);
-          return of(false);
-        })
-      );
-    }
-  }*/
 
   isLogged(): Observable<boolean> {
     if (!this.conditionalLogged() && !localStorage.getItem('token')) {
